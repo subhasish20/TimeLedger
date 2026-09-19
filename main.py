@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from pkg.MyTrace import ScreenTimeTracker
+from TimeLedger.TimeLedger import ScreenTimeTracker
 
 
 tracker = ScreenTimeTracker()
