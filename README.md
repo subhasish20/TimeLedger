@@ -14,87 +14,132 @@ The project addresses the lack of simple, local visibility into daily computer a
 
 ## 🚀 Features
 
-Based on the current repository and project description, TimeLedger is expected to provide:
+TimeLedger provides:
 
 * 🖥️ Screen-time tracking for computer usage.
-* 🔍 Active application or window detection, supported by the required `kdotool` dependency.
+* 🔍 Active application or window detection using `kdotool`.
 * ⏱️ Time accumulation based on the currently active task or window.
-* 📋 Task-related handling through `tasklist.py`.
 * 📊 Recording or displaying collected usage information.
-* 🐍 A Python-based entry point and supporting shell script for running the tracking workflow.
+* 🐍 Python-based application structure.
+* ▶️ Shell script for starting the application.
 
 ⚠️
 
-The exact feature set depends on the current source code. Features not visible from the repository structure are not claimed here.
-
-⚙️
+The exact feature set depends on the implementation in the current source code.
 
 ## 🔄 How It Works
 
-The application monitors computer usage and records time spent on activities. A typical workflow is expected to be:
+The application monitors computer usage and records time spent on activities.
+
+A typical workflow is:
 
 1. **🔎 Detect the active application or window**
-   TimeLedger requires `kdotool`. This suggests that active window or application detection depends on `kdotool` being installed and available on the system.
+
+   TimeLedger uses `kdotool` to detect the currently active window or application.
 
 2. **⏱️ Track usage time**
-   While an application or task is active, TimeLedger records the time spent on it.
 
-3. **📋 Process and maintain task information**
-   `tasklist.py` likely contains logic related to handling tasks or tracked items. The exact implementation should be checked in the source file.
+   While an application or task is active, TimeLedger tracks the amount of time spent on it.
+
+3. **📊 Process usage information**
+
+   The Python application processes the detected activity and maintains the required tracking information.
 
 4. **💾 Record or display collected information**
-   The application stores or presents the collected usage data in some form. The current repository structure does not document a graphical dashboard, so this should be treated as implementation-dependent.
 
-✅
+   The collected usage information is handled by the application according to the current implementation.
 
-Confirmed behavior from the project description: TimeLedger monitors and records how much time the user spends on the computer. Confirmed dependency: `kdotool` is required for correct operation.
+5. **▶️ Start through `run.sh`**
 
-📁
+   The `run.sh` script provides the main way to start TimeLedger and handles launching the Python application.
 
-## 🗂️ Project Structure
+## 📁 Project Structure
 
 ```text
 TimeLedger/
+├── LICENSE
 ├── main.py
-├── tasklist.py
-├── tracetime.sh
-└── requirements.txt
+├── README.md
+├── requirements.txt
+├── run.sh
+└── TimeLedger
+    ├── __init__.py
+    ├── __pycache__
+    │   ├── __init__.cpython-314.pyc
+    │   └── TimeLedger.cpython-314.pyc
+    └── TimeLedger.py
 ```
 
+### 📄 File and Directory Description
+
 * `main.py`
-  Likely the main Python entry point for the application. It probably starts the tracking process and coordinates other components.
 
-* `tasklist.py`
-  Likely contains task-related logic, such as managing tracked tasks or organizing usage information.
+  The main Python entry point of the application. It starts the TimeLedger application.
 
-* `tracetime.sh`
-  A shell script likely used to start, manage, or support the time-tracking workflow. Inspect the script for exact usage.
+* `run.sh`
+
+  The shell script used to launch TimeLedger. It provides a convenient way to start the application without manually typing the Python command.
 
 * `requirements.txt`
-  Lists the Python dependencies required by the project.
 
-🛠️
+  Contains the Python packages required by TimeLedger.
 
-## 📦 Requirements
+* `TimeLedger/`
 
-* 🐍 Python
-  A specific Python version is not documented in the repository structure. Use a currently supported Python 3 version.
+  Python package containing the main TimeLedger application code.
 
-* 📚 Python dependencies
-  Install the packages listed in `requirements.txt`.
+* `TimeLedger/TimeLedger.py`
 
-* 🪟 `kdotool`
-  Required for the application to work correctly. `kdotool` is used for active window or application detection.
+  Contains the main TimeLedger application logic.
 
-🐧
 
-### 🐧 Installing `kdotool` on Arch Linux / CachyOS
+* `LICENSE`
+
+  Contains the project's license information.
+
+* `README.md`
+
+  Documentation for the project.
+
+## 🛠️ Requirements
+
+### 🐍 Python
+
+TimeLedger requires Python 3.
+
+Check your installed Python version:
+
+```bash
+python --version
+```
+
+Or:
+
+```bash
+python3 --version
+```
+
+### 📚 Python Dependencies
+
+Install the packages listed in `requirements.txt`.
+
+### 🪟 `kdotool`
+
+`kdotool` is required for active window/application detection.
+
+## 🐧 Installing `kdotool` on Arch Linux / CachyOS
+
+On Arch Linux or CachyOS:
 
 ```bash
 sudo pacman -Sy kdotool
 ```
 
-📥
+Make sure `kdotool` is available:
+
+```bash
+kdotool --version
+```
 
 ## 💻 Installation
 
@@ -105,89 +150,138 @@ git clone https://github.com/subhasish20/TimeLedger.git
 cd TimeLedger
 ```
 
-📦
-
 Install the Python dependencies:
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-🐍
-
-If your system uses `python3`, use:
+If your system uses `python3`:
 
 ```bash
 python3 -m pip install -r requirements.txt
 ```
 
-🔧
-
-Install the required `kdotool` dependency on Arch Linux / CachyOS:
+Install `kdotool` on Arch Linux / CachyOS:
 
 ```bash
 sudo pacman -Sy kdotool
 ```
 
-▶️
-
 ## 🚀 Usage
 
-The exact run command depends on the intended entry point in the current source code. The primary Python entry point appears to be `main.py`.
+### ▶️ Recommended Method — `run.sh`
 
-▶️
+The recommended way to start TimeLedger is through the provided `run.sh` script.
 
-Run the application with:
+First, make the script executable:
+
+```bash
+chmod +x run.sh
+```
+
+Then run:
+
+```bash
+./run.sh
+```
+
+This starts the TimeLedger application using the project's configured run script.
+
+### 🐍 Run Directly with Python
+
+You can also start the application directly through `main.py`:
 
 ```bash
 python main.py
 ```
 
-🐍
-
-Or, if your system uses `python3`:
+Or:
 
 ```bash
 python3 main.py
 ```
 
-🖥️
+### 🔧 If `run.sh` Is Not Executable
 
-If the project is intended to be launched through the provided shell script, inspect `tracetime.sh` first and then run it according to its contents. For example:
+You can run the script through Bash without changing its executable permission:
 
 ```bash
-bash tracetime.sh
+bash run.sh
 ```
 
-⚠️
+## 🔄 Running TimeLedger
 
-Because the repository listing alone does not confirm the exact startup workflow, use the appropriate Python entry point for your setup.
+The recommended startup workflow is:
 
-🐧
+```text
+run.sh
+   │
+   ▼
+main.py
+   │
+   ▼
+TimeLedger/TimeLedger.py
+   │
+   ▼
+TimeLedger starts tracking
+   │
+   ▼
+kdotool detects the active window/application
+   │
+   ▼
+Usage information is processed
+```
+
+Therefore, users normally do **not** need to run `TimeLedger/TimeLedger.py` directly.
+
+Use:
+
+```bash
+./run.sh
+```
+
+as the primary command.
 
 ## 🐧 Linux Compatibility
 
-`kdotool` is required for TimeLedger to work correctly. The installation command shown in this README targets Arch Linux and CachyOS package management.
+`kdotool` is required for TimeLedger's active-window detection.
 
-🎯
+The documented installation command uses Arch Linux/CachyOS package management:
 
-For that reason, the current implementation is particularly oriented toward Linux systems using Arch/CachyOS package management. Support for other operating systems or desktop environments is not claimed unless verified in the source code.
+```bash
+sudo pacman -Sy kdotool
+```
 
-⚙️
+The current implementation is primarily oriented toward Linux systems where `kdotool` is available.
+
+Support for other operating systems or desktop environments depends on whether the required window-detection functionality is available.
 
 ## 🔧 Configuration
 
-No configuration files or configuration options are documented in the current repository structure.
+No separate configuration file is currently included in the project structure.
 
-📌
+Before running TimeLedger, make sure:
 
-At minimum, ensure that `kdotool` is installed and available in your system `PATH`. If additional configuration is required, it should be documented after reviewing the source files.
+1. Python 3 is installed.
+2. Python dependencies are installed.
+3. `kdotool` is installed.
+4. `kdotool` is available in your system `PATH`.
+5. `run.sh` has executable permission.
 
-🚀
+You can verify the required commands with:
+
+```bash
+python --version
+```
+
+```bash
+kdotool --version
+```
 
 ## 🔮 Future Improvements
 
-The following are possible future improvements, not existing features unless already implemented in the source code:
+Possible future improvements include:
 
 * 📊 Graphical dashboard.
 * 📅 Daily, weekly, and monthly reports.
@@ -197,8 +291,7 @@ The following are possible future improvements, not existing features unless alr
 * 🔔 Desktop notifications.
 * 📤 Export to CSV or JSON.
 * 🖥️ Support for additional desktop environments.
-
-🤝
+* 🚀 Automatic startup with the desktop session.
 
 ## 🤝 Contributing
 
@@ -215,23 +308,14 @@ Contributions are welcome.
 
 Please keep changes focused and describe what you modified in the pull request.
 
-📜
-
 ## 📜 License
 
-License information will be added here.
+See the `LICENSE` file for license information.
 
-👤
-
-## 👨‍💻 Author / Contact
+## 👤 Author / Contact
 
 **Subhasish Jena**
+
 GitHub: https://github.com/subhasish20
 
 Email: [subhasishjena8280@gmail.com](mailto:subhasishjena8280@gmail.com)
-
-🔗
-
-## 🌐 GitHub Repository
-
-https://github.com/subhasish20/TimeLedger.git
