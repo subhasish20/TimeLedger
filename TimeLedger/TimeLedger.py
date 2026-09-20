@@ -1,3 +1,6 @@
+"""
+ The subprocess module provides access to system-level commands and external processes.
+"""
 import subprocess
 
 
